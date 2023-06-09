@@ -2,38 +2,51 @@
 let score = 0;
 let numberNow = 0;
 const container = document.getElementById('main');
+const showlvl = document.getElementById('lvl');
 const showTitle = document.getElementById('title');
+let lvlup = 1;
 const show = (e) => {
     const scoreTable = document.getElementById('score');
     if (e.target.className === 'zero hide') {
         e.target.classList.remove('hide');
-        score += 1;
         numberNow += 1;
         const correct = document.getElementsByClassName('zero hide');
         const correctt = document.getElementsByClassName('zero');
-        console.log(correctt.length);
         //console.log(numberNow)
         if ((correctt.length) === numberNow) {
             numberNow = 0;
-            showTitle.textContent = "Correct!!";
-            setTimeout(() => { losowanie(); }, 2000);
+            score += 1;
+            if (score % 2) {
+                console.log(lvlup);
+                setTimeout(() => { losowanie('', lvlup); }, 2000);
+            }
+            else {
+                lvlup += 1;
+                console.log(lvlup);
+                showTitle.textContent = "Correct!!";
+                setTimeout(() => { losowanie('', lvlup); }, 2000);
+                showlvl.textContent = `Lvl:${lvlup}`;
+            }
         }
         scoreTable.textContent = `Your score: ${score.toString()}`;
     }
     else if (e.target.className === 'one hide') {
         score = 0;
         numberNow = 0;
+        lvlup = 1;
         scoreTable.textContent = `Your score: ${score.toString()}`;
         showTitle.textContent = "Upss...Wrong";
+        showlvl.textContent = `Lvl:${lvlup}`;
         setTimeout(() => { losowanie('Try again'); }, 3000);
     }
-    else {
+    else if (e.target.id === 'button') {
         score = 0;
+        lvlup = 1;
         scoreTable.textContent = `Your score: ${score.toString()}`;
-        console.log(e.target);
+        showlvl.textContent = `Lvl:${lvlup}`;
     }
 };
-const losowanie = (a = '') => {
+const losowanie = (a = '', target = 1) => {
     let plate = [];
     showTitle.textContent = a;
     numberNow = 0;
@@ -53,10 +66,21 @@ const losowanie = (a = '') => {
         newDiv.id = 'main';
         p.appendChild(newDiv);
     }
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < target; i++) {
         plate[i] = [];
-        for (let k = 0; k < 8; k++) {
+        for (let k = 0; k < 4; k++) {
             plate[i][k] = Math.floor(Math.random() * 2);
+        }
+    }
+    console.log(plate);
+    for (let i = 0; i < plate.length; i++) {
+        let same = (plate[i].filter((item => item > 0)));
+        console.log(same);
+        if (same.length === 4) {
+            losowanie();
+        }
+        else if (same.length === 0) {
+            losowanie();
         }
     }
     ////
@@ -90,6 +114,7 @@ const losowanie = (a = '') => {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const button = document.getElementById('button');
 button.addEventListener('click', () => { losowanie('Lets try'); });
+button.addEventListener('click', () => { button.textContent = "Play again"; });
 button.addEventListener('click', (e) => { show(e); });
 ///
 ////
