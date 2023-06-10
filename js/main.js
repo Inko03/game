@@ -1,6 +1,14 @@
 "use strict";
 let score = 0;
 let numberNow = 0;
+const emitkiScorowe = ["Well played 😎",
+    "Nice 😀",
+    "Keep it!!🤠",
+    "Good job 👌"];
+const emitkiLvlUp = ["Express New lvl 💪",
+    "Wow New lvl 🤗 ",
+    "New lvl!!🤠",
+    " New lvl👌"];
 const container = document.getElementById('main');
 const showlvl = document.getElementById('lvl');
 const showTitle = document.getElementById('title');
@@ -14,19 +22,23 @@ const show = (e) => {
         const correctt = document.getElementsByClassName('zero');
         //console.log(numberNow)
         if ((correctt.length) === numberNow) {
+            showTitle.textContent = "Nice";
             numberNow = 0;
             score += 1;
             if (score % 2) {
-                console.log(lvlup);
+                console.log(emitkiScorowe[Math.floor(Math.random() * 4)]);
+                showTitle.textContent = emitkiScorowe[Math.floor(Math.random() * 4)];
                 setTimeout(() => { losowanie('', lvlup); }, 2000);
             }
             else {
                 lvlup += 1;
                 console.log(lvlup);
-                showTitle.textContent = "Correct!!";
+                showTitle.textContent = emitkiLvlUp[Math.floor(Math.random() * 4)];
                 setTimeout(() => { losowanie('', lvlup); }, 2000);
                 showlvl.textContent = `Lvl:${lvlup}`;
             }
+        }
+        else {
         }
         scoreTable.textContent = `Your score: ${score.toString()}`;
     }
@@ -37,7 +49,7 @@ const show = (e) => {
         scoreTable.textContent = `Your score: ${score.toString()}`;
         showTitle.textContent = "Upss...Wrong";
         showlvl.textContent = `Lvl:${lvlup}`;
-        setTimeout(() => { losowanie('Try again'); }, 3000);
+        setTimeout(() => { losowanie('Try again', 1); }, 3000);
     }
     else if (e.target.id === 'button') {
         score = 0;
@@ -72,17 +84,21 @@ const losowanie = (a = '', target = 1) => {
             plate[i][k] = Math.floor(Math.random() * 2);
         }
     }
-    console.log(plate);
     for (let i = 0; i < plate.length; i++) {
         let same = (plate[i].filter((item => item > 0)));
-        console.log(same);
         if (same.length === 4) {
-            losowanie();
+            for (let k = 0; k < 4; k++) {
+                plate[i][k] = Math.floor(Math.random() * 2);
+            }
         }
         else if (same.length === 0) {
-            losowanie();
+            for (let k = 0; k < 4; k++) {
+                plate[i][k] = Math.floor(Math.random() * 2);
+            }
         }
     }
+    ///
+    console.log(plate);
     ////
     const container = document.getElementById('main');
     ////
