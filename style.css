@@ -21,6 +21,7 @@ body{
     padding: 10px;
     border: 2px solid black;
 }
+
 #score-p{
     position: relative;
 }
@@ -61,12 +62,11 @@ body{
     height: 10px;
     background-color: rgb(228, 228, 228);
     left: -1px;
-    bottom:15px;
+    bottom:20px;
     animation: rainbow-left infinite 3s;
 }
 @keyframes rainbow {
     0%{transform: translateX(-60px);}
-    
     100%{transform:translateX(170px);}
 }
 @keyframes rainbow-bottom {
@@ -75,12 +75,11 @@ body{
 }
 @keyframes rainbow-down {
     0%{transform: translateY(-30px);}
-
     100%{transform:translateY(40px);}
 }
 @keyframes rainbow-left {
-    0%{transform: translateY(15px);}
-    100%{transform: translateY(-50px);}
+    0%{transform: translateY(30px);}
+    100%{transform: translateY(-40px);}
 }
 #p{
     display: flex;
