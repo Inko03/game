@@ -69,24 +69,7 @@ const losowanie = (a = '', target = 1) => {
     const p = document.getElementById('p');
     const scoreTable = document.getElementById('score');
     scoreTable.textContent = `Your score: ${score.toString()}`;
-    showTitle.textContent = "Let's play
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    ";
+    showTitle.textContent = "Let's play";
     for (let i = 0; i < target; i++) {
         plate[i] = [];
         for (let k = 0; k < 4; k++) {
